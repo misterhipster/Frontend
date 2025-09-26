@@ -8,6 +8,8 @@
 <body>
 <input id="textInput">
 <button onclick="send()">Отправить</button>
+<button onclick="getData()">Получить данные</button>
+<div id="resultContainer"></div>
 <script>
 async function send() {
   const response = await fetch('http://localhost:8080/api/send', {
@@ -16,6 +18,16 @@ async function send() {
   });
   const result = await response.text();
   alert(result); // Показать ответ от сервера
+}
+
+async function getData() {
+    try {
+        const response = await fetch('http://localhost:8080/api/get');
+        const result = await response.text();
+        document.getElementById('resultContainer').innerText = result;
+    } catch (error) {
+        document.getElementById('resultContainer').innerText = 'Ошибка при получении данных';
+    }
 }
 </script>
 </body>
